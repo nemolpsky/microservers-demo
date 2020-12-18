@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 @RestController()
 @RequestMapping(value = "/user/server")
-//@RequestMapping("server")
 public class UserServer {
     private Logger logger = LoggerFactory.getLogger(UserServer.class);
 

@@ -29,24 +29,4 @@ public class ClientController {
         param.setAge2(random.nextInt(15));
         return userClient.findByAge(param);
     }
-
-    @GetMapping("/findByList")
-    public User findByList(){
-        Random random = new Random();
-        Map<String, List<User>> map = new HashMap<>();
-
-        int i=0;
-        while (i<5){
-            List<User> list = new ArrayList<>();
-            User user1 = new User(random.nextInt(15));
-            User user2 = new User(random.nextInt(15));
-            User user3 = new User(random.nextInt(15));
-            list.add(user1);
-            list.add(user2);
-            list.add(user3);
-            map.put(i+"",list);
-            i++;
-        }
-        return userClient.findByList(map);
-    }
 }

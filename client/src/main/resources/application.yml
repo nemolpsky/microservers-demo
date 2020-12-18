@@ -10,6 +10,7 @@ server:
 feign:
   client:
     config:
+      # default表示，全局配置，单个配置使用feign的value值代替default
       default:
         connectTimeout: 2000
         readTimeout: 2000
@@ -19,6 +20,7 @@ feign:
 # 配置Hystrix的超时时间，默认1000毫秒，应该比上面两个超时时间加依赖要长
 hystrix:
   command:
+    # default表示，全局配置，单个配置使用feign的value值代替default
     default:
       execution:
         timeout:

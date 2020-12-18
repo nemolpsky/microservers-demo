@@ -10,7 +10,6 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import javax.annotation.PostConstruct;
 
 @SpringBootApplication
-//@EnableDiscoveryClient
 public class ServerApplication {
 
     private Logger logger = LoggerFactory.getLogger(ServerApplication.class);
