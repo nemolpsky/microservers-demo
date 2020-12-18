@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: client
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+server:
+  port: 10002
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 2000
+  hystrix:
+    enabled: true
+
+# 配置Hystrix的超时时间，默认1000毫秒，应该比上面两个超时时间加依赖要长
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000
+
+# Feign日志
+logging.level.com.lp.client.UserClient: debug
