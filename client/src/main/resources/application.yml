@@ -17,6 +17,12 @@ feign:
   hystrix:
     enabled: true
 
+# hystrix的信息访问路径
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
 # 配置Hystrix的超时时间，默认1000毫秒，应该比上面两个超时时间加依赖要长
 hystrix:
   command:
@@ -31,3 +37,5 @@ hystrix:
 
 # Feign日志
 logging.level.com.lp.client.UserClient: debug
+
+

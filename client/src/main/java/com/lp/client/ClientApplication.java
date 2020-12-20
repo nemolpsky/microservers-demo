@@ -2,10 +2,14 @@ package com.lp.client;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+@EnableHystrix  // 想要使用Hystrix的监控仪表盘需要配置这个注解，这个注解需要额外的spring-cloud-starter-netflix-hystrix依赖
 @EnableFeignClients
 @SpringBootApplication
+@EnableDiscoveryClient
 public class ClientApplication {
 
     public static void main(String[] args) {

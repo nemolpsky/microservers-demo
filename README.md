@@ -50,7 +50,9 @@ public class UserServer {
 ```
 
 feign自带封装好的日志输出，yml配置文件中先配置client接口的日志路径，再添加FeignLogConfig
-文件，配置输出的级别，默认是None不输出，还有另外三个级别。
+文件，配置输出的级别，默认是None不输出，还有另外三个级别。要使用configuration属性使用这个
+配置类，配置文件的优先级比Bean要高，修改feign.client.default-to-properties参数可以颠倒优先级。
+注意这个配置类添加@Configuration就会自动配置到全局范围呢。
 ```
 logging.level.com.lp.client.UserClient: debug
 
@@ -58,6 +60,8 @@ logging.level.com.lp.client.UserClient: debug
 Logger.Level feignLoggerLevel(){
     return Logger.Level.BASIC;
 }
+
+@FeignClient(value = "server",path = "/user/server", fallbackFactory  = Fallback.class,configuration = FeignLogConfig.class)
 ```
 
 还有自带的注解@SpringQueryMap，对象传参又不想用json格式，可以用这个注解。
@@ -68,8 +72,8 @@ User findByAge(@SpringQueryMap Param param);
 
 ---
 
-### 2.Hystrix使用
-feign里面已经集成了hystrix，不过是关闭的，需要下面配置打开，还有配置超时时间。一旦打开，所有feign
+### 2. Hystrix使用
+feign里面已经集成了hystrix，不需要额外的依赖，需要下面配置打开，还可以配置超时时间。一旦打开，所有feign
 客户端都被包了一个熔断器。
 ```
 feign:
@@ -99,3 +103,44 @@ hystrix:
 @FeignClient(value = "server",path = "/user/server", fallbackFactory  = Fallback.class)
 @FeignClient(value = "server",path = "/user/server", fallback  = Fallback2.class)
 ```
+
+单独想关闭一个feign客户端的熔断器，配置下列的代码即可。
+```
+@Configuration
+public class FooConfiguration {
+    @Bean
+    @Scope("prototype")
+    public Feign.Builder feignBuilder() {
+        return Feign.builder();
+    }
+}
+```
+
+Hystrix提供了一个监控仪表盘hystrix dashboard，其实就是一个单独的服务，在hystrix模块中添加
+下面的依赖，启动类使用@EnableHystrixDashboard注解，还需要在配置文件中
+配置代理允许访问的host列表。
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+</dependency>
+```
+
+本质上是提供代理去访问服务自带的监控，所以想要用仪表盘监控client项目，需要
+添加下面的监控依赖，配置文件中配置hystrix的访问页面。client还必须添加额外的
+hystrix依赖，使用额外的注解。最后先访问http://localhost:10004/hystrix，再通过
+界面代理访问http://localhost:10002/actuator/hystrix.stream。
+```
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+```
+
+
+

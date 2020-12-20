@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: hystrix-dashboard
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+server:
+  port: 10004
+# 代理允许访问的host名单
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: '*'
