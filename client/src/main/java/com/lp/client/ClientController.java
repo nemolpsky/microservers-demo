@@ -17,7 +17,6 @@ public class ClientController {
 
     private Logger logger = LoggerFactory.getLogger(ClientController.class);
 
-
     @Autowired
     private UserClient userClient;
 
@@ -25,18 +24,49 @@ public class ClientController {
     private SystemClient systemClient;
 
     // 注意，定义的降级方法签名需要保持一致
-    @HystrixCommand(fallbackMethod = "errorReturn", commandProperties = {
-            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "1000")
-    })
-    @GetMapping("/hystrixGet")
-    public User hystrixGet(Integer time) throws Exception {
+    @HystrixCommand(fallbackMethod = "errorReturn",groupKey = "key1",commandKey = "key2"
+            , commandProperties = {
+                @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "10000"),
+//                @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "1"),
+//                @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+//                @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "1")
+                }
+            )
+    @GetMapping("/hystrixGet1")
+    public User hystrixGet1(Integer time) throws Exception {
         time = time==null?0:time;
-        logger.info("hystrixGet step 1");
+        logger.info("hystrixGet1 step 1，thread is {}",Thread.currentThread().getName());
         if (time>0){
-            logger.info("hystrixGet step 2");
+            int i = 1/0;
+            logger.info("hystrixGet step 1");
             TimeUnit.SECONDS.sleep(time);
         }
-        logger.info("hystrixGet step 3");
+        logger.info("hystrixGet step 1");
+        return new User(111);
+    }
+
+    // 注意，定义的降级方法签名需要保持一致
+    @HystrixCommand(fallbackMethod = "errorReturn",groupKey = "key2",commandKey = "key2"
+            , commandProperties = {
+            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "10000")
+//                @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "1"),
+//                @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+//                @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "1")
+            },threadPoolProperties = {
+//            @HystrixProperty(name = "maximumSize", value = "1"),
+            @HystrixProperty(name = "coreSize", value = "1"),
+//            @HystrixProperty(name = "allowMaximumSizeToDivergeFromCoreSize", value = "1")
+    }
+    )
+    @GetMapping("/hystrixGet2")
+    public User hystrixGet2(Integer time) throws Exception {
+        time = time==null?0:time;
+        logger.info("hystrixGet2 step 1，thread is {}",Thread.currentThread().getName());
+        if (time>0){
+            logger.info("hystrixGet2 step 2");
+            TimeUnit.SECONDS.sleep(time);
+        }
+        logger.info("hystrixGet2 step 3");
         return new User(111);
     }
 

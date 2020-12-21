@@ -33,7 +33,7 @@ public interface UserClient extends UserService{
 ```
 
 服务端server中提供对应地址的实现方法调用即可，本质上就是用feign简化调用的过程。
-所以上面客户端的path属性对应服务端中的路径名。
+所以上面客户端的path属性对应服务端中的路径名，value则是对应服务名。
 
 ```
 @RestController()
@@ -142,5 +142,17 @@ hystrix依赖，使用额外的注解。最后先访问http://localhost:10004/hy
 </dependency>
 ```
 
+也可以直接使用@HystrixCommand注解配置Hystrix，参数可以参考Hystrix在Github
+上官方提供的配置文档。
 
+```
+@HystrixCommand(fallbackMethod = "errorReturn",groupKey = "key1",commandKey = "key1"
+    , commandProperties = {
+    @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "10000"),
+    @HystrixProperty(name = "circuitBreaker.requestVolumeThreshold", value = "1"),
+    @HystrixProperty(name = "circuitBreaker.sleepWindowInMilliseconds", value = "10000"),
+    @HystrixProperty(name = "circuitBreaker.errorThresholdPercentage",value = "1")
+     }
+)
+```
 

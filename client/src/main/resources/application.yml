@@ -1,6 +1,10 @@
 spring:
   application:
     name: client
+  cloud:
+    circuitbreaker:
+      hystrix:
+        enabled: false
 eureka:
   client:
     service-url:
@@ -12,10 +16,8 @@ feign:
     config:
       # default表示，全局配置，单个配置使用feign的value值代替default
       default:
-        connectTimeout: 2000
-        readTimeout: 2000
-  hystrix:
-    enabled: true
+        connectTimeout: 5000
+        readTimeout: 5000
 
 # hystrix的信息访问路径
 management:
@@ -33,9 +35,8 @@ hystrix:
           enabled: true
         isolation:
           thread:
-            timeoutInMilliseconds: 1000
-
+            timeoutInMilliseconds: 10000
 # Feign日志
 logging.level.com.lp.client.UserClient: debug
 
-
+#debug: true

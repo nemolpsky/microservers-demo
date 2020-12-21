@@ -2,31 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="95f3a81e-fc63-47af-bdfb-b7112eca89e6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_afterburner_2_11_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_hystrix_hystrix_javanica_1_5_18.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_hystrix_hystrix_metrics_event_stream_1_5_18.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_netflix_hystrix_hystrix_serialization_1_5_18.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_reactivex_rxjava_reactive_streams_1_2_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_10.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_netflix_hystrix_dashboard_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_hystrix_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_hystrix_dashboard_2_2_6_RELEASE.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webjars_d3js_3_4_11.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_webjars_jquery_3_5_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/client/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/lp/client/ClientApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/lp/client/ClientApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/lp/client/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/lp/client/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/lp/client/Fallback2.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/lp/client/Fallback2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/main/java/com/lp/client/FeignLogConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/lp/client/FeignLogConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/java/com/lp/client/UserClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/java/com/lp/client/UserClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/lp/server/ServerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/lp/server/ServerApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/com/lp/server/UserServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/com/lp/server/UserServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +119,12 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Finished" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Spring Boot" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Not Started" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
             </expand>
             <select />
@@ -161,6 +149,7 @@
       <workItem from="1608283233481" duration="1903000" />
       <workItem from="1608298683185" duration="1284000" />
       <workItem from="1608429028986" duration="15808000" />
+      <workItem from="1608539163525" duration="13005000" />
     </task>
     <servers />
   </component>
@@ -172,42 +161,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="721" y="167" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1608447213320" />
-    <state x="690" y="217" key="FileChooserDialogImpl" timestamp="1608451990027">
+    <state x="690" y="217" key="FileChooserDialogImpl" timestamp="1608544072154">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="217" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608451990027" />
-    <state width="1506" height="293" key="GridCell.Tab.0.bottom" timestamp="1608452301632">
+    <state x="690" y="217" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608544072154" />
+    <state width="1506" height="326" key="GridCell.Tab.0.bottom" timestamp="1608555603972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="293" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608452301632" />
-    <state width="1506" height="293" key="GridCell.Tab.0.center" timestamp="1608452301632">
+    <state width="1506" height="326" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608555603972" />
+    <state width="1506" height="326" key="GridCell.Tab.0.center" timestamp="1608555603972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="293" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608452301632" />
-    <state width="1506" height="293" key="GridCell.Tab.0.left" timestamp="1608452301631">
+    <state width="1506" height="326" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608555603972" />
+    <state width="1506" height="326" key="GridCell.Tab.0.left" timestamp="1608555603972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="293" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608452301631" />
-    <state width="1506" height="293" key="GridCell.Tab.0.right" timestamp="1608452301632">
+    <state width="1506" height="326" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608555603972" />
+    <state width="1506" height="326" key="GridCell.Tab.0.right" timestamp="1608555603972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="293" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608452301632" />
-    <state width="1506" height="293" key="GridCell.Tab.1.bottom" timestamp="1608452301632">
+    <state width="1506" height="326" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608555603972" />
+    <state width="1506" height="326" key="GridCell.Tab.1.bottom" timestamp="1608555603973">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="293" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608452301632" />
-    <state width="1506" height="293" key="GridCell.Tab.1.center" timestamp="1608452301632">
+    <state width="1506" height="326" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1608555603973" />
+    <state width="1506" height="326" key="GridCell.Tab.1.center" timestamp="1608555603972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="293" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608452301632" />
-    <state width="1506" height="293" key="GridCell.Tab.1.left" timestamp="1608452301632">
+    <state width="1506" height="326" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1608555603972" />
+    <state width="1506" height="326" key="GridCell.Tab.1.left" timestamp="1608555603972">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="293" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608452301632" />
-    <state width="1506" height="293" key="GridCell.Tab.1.right" timestamp="1608452301632">
+    <state width="1506" height="326" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1608555603972" />
+    <state width="1506" height="326" key="GridCell.Tab.1.right" timestamp="1608555603973">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1506" height="293" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608452301632" />
+    <state width="1506" height="326" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1608555603973" />
+    <state x="544" y="179" width="831" height="682" key="find.popup" timestamp="1608545244048">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="544" y="179" width="831" height="682" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1608545244048" />
     <state x="109" y="281" width="1609" height="699" key="new project wizard" timestamp="1608451985006">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

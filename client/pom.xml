@@ -43,6 +43,12 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <artifactId>io.github.openfeign</artifactId>-->
+<!--                    <groupId>feign-hystrix</groupId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
         </dependency>
 
         <dependency>
