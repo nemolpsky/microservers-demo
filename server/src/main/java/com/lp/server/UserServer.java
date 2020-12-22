@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.concurrent.TimeUnit;
 
 @RestController()
@@ -30,8 +31,10 @@ public class UserServer {
     }
 
     @RequestMapping(value = "/find")
-    User find(){
+    User find(HttpServletRequest request){
         logger.info("call /user/server/find");
+        logger.info("param is {}.",request.getAttribute("param"));
+        logger.info("threadName is {}",Thread.currentThread().getName());
         return new User(12);
     }
 
@@ -39,5 +42,11 @@ public class UserServer {
     public User findByAge(Param param){
         logger.info("call /user/server/findByAge, param is {}.",param);
         return new User(param.getAge1()+param.getAge2());
+    }
+
+    @RequestMapping(value = "/findStr")
+    String findStr(){
+        logger.info("call /user/server/findStr");
+        return "findStr";
     }
 }
