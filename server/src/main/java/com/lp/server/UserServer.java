@@ -23,7 +23,7 @@ public class UserServer {
     User get(){
         logger.info("call /user/server/get");
         try {
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(10);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

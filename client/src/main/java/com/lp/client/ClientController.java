@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -107,16 +106,9 @@ public class ClientController {
         return userClient.get();
     }
 
-    @CacheResult(cacheKeyMethod = "getCacheKey")
     @GetMapping("/find")
-    public User findUser(HttpServletRequest request) {
-//        HystrixRequestContext context = HystrixRequestContext.initializeContext();
-        request.setAttribute("param","paramObject");
-        logger.info("param is {}.",request.getAttribute("param"));
-        userClient.find();
-        userClient.find();
-        logger.info("log：{}", HystrixRequestLog.getCurrentRequest().getExecutedCommandsAsString());
-        return null;
+    public User findUser() {
+        return userClient.find();
     }
 
     @GetMapping("/findByAge")

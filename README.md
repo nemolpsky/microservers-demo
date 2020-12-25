@@ -52,7 +52,7 @@ public class UserServer {
 feign自带封装好的日志输出，yml配置文件中先配置client接口的日志路径，再添加FeignLogConfig
 文件，配置输出的级别，默认是None不输出，还有另外三个级别。要使用configuration属性使用这个
 配置类，配置文件的优先级比Bean要高，修改feign.client.default-to-properties参数可以颠倒优先级。
-注意这个配置类添加@Configuration就会自动配置到全局范围呢。
+注意这个配置类添加@Configuration就会自动配置到全局范围。
 ```
 logging.level.com.lp.client.UserClient: debug
 
@@ -68,6 +68,14 @@ Logger.Level feignLoggerLevel(){
 ```
 @RequestMapping(value = "/findByAge")
 User findByAge(@SpringQueryMap Param param);
+```
+
+还可以添加重试，和上面日志一样的配置，一样的导入即可。全局的话在配置类上加@Configuration注解。
+```
+@Bean
+public Retryer feignRetryer() {
+    return new Retryer.Default(100,SECONDS.toMillis(1),3);
+}
 ```
 
 ---
