@@ -7,3 +7,7 @@ eureka:
       defaultZone: http://localhost:10001/eureka/
 server:
   port: 10003
+
+# 如果服务端配置了该选项，那就要在@FeignClient注解上的path属性添加/uu，因为服务端的请求路径添加了/uu，要保持一致
+#  servlet:
+#    context-path: /uu
