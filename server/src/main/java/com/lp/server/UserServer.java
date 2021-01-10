@@ -2,6 +2,8 @@ package com.lp.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +14,9 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping(value = "/user/server")
 public class UserServer {
     private Logger logger = LoggerFactory.getLogger(UserServer.class);
+
+    @Autowired
+    Environment environment;
 
     @RequestMapping(value = "")
     User index(){
@@ -48,5 +53,11 @@ public class UserServer {
     String findStr(){
         logger.info("call /user/server/findStr");
         return "findStr";
+    }
+
+    @RequestMapping(value = "/findText")
+    String findText(){
+        logger.info("call /user/server/findText");
+        return "findText:" + environment.getProperty("local.server.port");
     }
 }

@@ -120,6 +120,11 @@ public class ClientController {
         return userClient.findByAge(param);
     }
 
+    @GetMapping("/findText")
+    public String findText() {
+        return userClient.findText();
+    }
+
     public User errorReturn(Integer i){
         return new User(-100);
     }

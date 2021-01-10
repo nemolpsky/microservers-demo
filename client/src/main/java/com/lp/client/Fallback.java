@@ -29,6 +29,11 @@ public class Fallback implements FallbackFactory<UserClient> {
                 return null;
             }
 
+            @Override
+            public String findText() {
+                return null;
+            }
+
         };
     }
 }

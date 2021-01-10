@@ -12,4 +12,7 @@ public interface UserClient extends UserService{
 
     @RequestMapping(value = "/findByAge")
     User findByAge(@SpringQueryMap Param param);
+
+    @RequestMapping(value = "/findText")
+    String findText();
 }
