@@ -8,7 +8,6 @@ import java.util.List;
 
 public class CustomRule extends ClientConfigEnabledRoundRobinRule {
     private Logger logger = LoggerFactory.getLogger(CustomRule.class);
-
     private LoadBalancerStats loadBalancerStats;
 
     public CustomRule() {

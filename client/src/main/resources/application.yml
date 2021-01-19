@@ -38,5 +38,4 @@ hystrix:
             timeoutInMilliseconds: 10000
 # Feign日志
 logging.level.com.lp.client.UserClient: debug
-
 #debug: true

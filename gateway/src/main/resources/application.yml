@@ -1,0 +1,40 @@
+
+server:
+  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+spring:
+  cloud:
+    gateway:
+      routes:
+#      # 使用路径转发，比如localhost:8080/find会转发到http://localhost:10002/find
+#      - id: client
+#        uri: http://localhost:10002
+#        predicates:
+#          - Path=/**
+#      # 使用负载均衡转发，比如localhost:8080/find会转发到http://localhost:10002/find
+#      # lb://后面接服务名
+#      - id: client
+#        uri: lb://CLIENT
+#        predicates:
+#          - Path=/find
+#      # 重写路径转发，比如localhost:8080/client/find会转发到http://localhost:10002/find，去掉client
+      - id: client
+        uri: lb://CLIENT
+        predicates:
+          - Path=/client/**
+        filters:
+          - RewritePath=/client(?<segment>/?.*), $\{segment}
+      - id: user-service
+        uri: http://localhost:10003
+        predicates:
+          - Path=/user/**
+#      # 重写路径转发，比如localhost:8080/user/find会转发到http://localhost:10003/user/server/find，替换/user
+        filters:
+          - RewritePath=/user(?<segment>/?.*), /user/server$\{segment}
+  application:
+    name: gateway
+
+
