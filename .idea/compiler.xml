@@ -8,9 +8,11 @@
         <outputRelativeToContentRoot value="true" />
         <module name="gateway" />
         <module name="eureka" />
+        <module name="nacos-provider" />
         <module name="hystrix" />
         <module name="server" />
         <module name="client" />
+        <module name="nacos-consumer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="8">
@@ -19,6 +21,9 @@
       <module name="feign-demo" target="1.8" />
       <module name="gateway" target="1.8" />
       <module name="hystrix" target="1.8" />
+      <module name="nacos" target="1.8" />
+      <module name="nacos-consumer" target="1.8" />
+      <module name="nacos-provider" target="1.8" />
       <module name="server" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -29,6 +34,9 @@
       <module name="feign-demo" options="-parameters" />
       <module name="gateway" options="-parameters" />
       <module name="hystrix" options="-parameters" />
+      <module name="nacos" options="-parameters" />
+      <module name="nacos-consumer" options="-parameters" />
+      <module name="nacos-provider" options="-parameters" />
       <module name="server" options="-parameters" />
     </option>
   </component>
