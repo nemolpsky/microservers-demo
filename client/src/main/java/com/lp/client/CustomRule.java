@@ -28,7 +28,6 @@ public class CustomRule extends ClientConfigEnabledRoundRobinRule {
                 if (!serverStats.isCircuitBreakerTripped(currentTime)) {
                     int concurrentConnections = serverStats.getActiveRequestsCount(currentTime);
                     if (concurrentConnections < minimalConcurrentConnections) {
-                        minimalConcurrentConnections = concurrentConnections;
                         chosen = server;
                     }
                 }

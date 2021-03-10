@@ -142,7 +142,7 @@ Hystrix提供了一个监控仪表盘hystrix dashboard，其实就是一个单�
 本质上是提供代理去访问服务自带的监控，所以想要用仪表盘监控client项目，需要
 添加下面的监控依赖，配置文件中配置hystrix的访问页面。client还必须添加额外的
 hystrix依赖，使用额外的注解。最后先访问http://localhost:10004/hystrix，再通过
-界面代理访问http://localhost:10002/actuator/hystrix.stream。
+界面代理访问 http://localhost:10002/actuator/hystrix.stream 。
 ```
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -199,9 +199,7 @@ public class DefaultRibbonConfig {
 2021-01-10 12:02:52.860 DEBUG 6664 --- [io-10002-exec-6] com.lp.client.UserClient                 : [UserClient#findText] <--- HTTP/1.1 200 (2ms)
 ```
 
-更多配置可以参考官网。
-
-https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html
+更多配置可以参考[官网](https://cloud.spring.io/spring-cloud-netflix/multi/multi_spring-cloud-ribbon.html)。
 
 ---
 
@@ -249,7 +247,7 @@ Spring Cloud GateWay是一个网关框架，可以转发处理请求。使用起
 Nacos是阿里主推的一个构建服务的基础框架，它可以选择是支持AP还是CP，除了像Eureka那样提供服务注册的功能之外，还自带管理界面，使用起来更加方便。使用的时候
 首先要下载安装，然后添加依赖。
 
-添加下面的依赖就可以使用，但是要注意，对版本是有要求的，Spring Cloud，Spring Cloud Alibaba和Nacos依赖的版本都是有要求的。详细的可以查看官网https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E，
+添加下面的依赖就可以使用，但是要注意，对版本是有要求的，Spring Cloud，Spring Cloud Alibaba和Nacos依赖的版本都是有要求的。详细的可以查看[官网](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)，
 本项目是Spring Cloud Hoxton.SR9，Spring Cloud Alibaba 2.2.0.RELEASE和Nacos 2.1.0.RELEASE。
 ```
     <dependencies>
@@ -280,7 +278,7 @@ Nacos是阿里主推的一个构建服务的基础框架，它可以选择是支
     </dependencyManagement>
 ```
 
-启动类打个注解，访问http://localhost:8848/nacos/index.html就可以看到Nacos的控制台服务列表里面有数据了。总的来说很简单，功能也比较齐全，还自带
+启动类打个注解，访问 http://localhost:8848/nacos/index.html 就可以看到Nacos的控制台服务列表里面有数据了。总的来说很简单，功能也比较齐全，还自带
 管理界面，减少了运维成本，不过文档和例子比起Spring还是少了很多，质量也差了很多。
 ```
 @EnableDiscoveryClient
