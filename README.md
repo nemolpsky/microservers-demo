@@ -314,4 +314,4 @@ ${prefix}-${spring.profiles.active}.${file-extension}
 下面是在Nacos中配置了三个配置文件，nacos-provider.yaml不配置profiles的情况，nacos-provider就是上面说的应用名，前两个则分别对应dev和test环境。
 按照配置文件中激活不同的环境就会读取不同的配置文件。
 
-![nacos1](https://github.com/nemolpsky/feign-demo/raw/master/images/nacos1.png)
+![nacos1](./images/nacos1.png)
