@@ -16,6 +16,7 @@ public class ConsumerController {
 
     @RequestMapping("/get")
     public String get() {
+        logger.info("nacos consumer get.");
         return consumerClient.get();
     }
 

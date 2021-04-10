@@ -1,11 +1,2 @@
-spring:
-  application:
-    name: nacos-provider
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-#      config:
-#        server-addr: localhost:8848
-#        file-extension: yaml
-server:
-  port: 10006
+#server:
+#  port: 10006

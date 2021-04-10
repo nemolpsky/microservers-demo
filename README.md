@@ -251,12 +251,6 @@ Nacos是阿里主推的一个构建服务的基础框架，它可以选择是支
 本项目是Spring Cloud Hoxton.SR9，Spring Cloud Alibaba 2.2.0.RELEASE和Nacos 2.1.0.RELEASE。
 ```
     <dependencies>
-        <!-- 动态配置 -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
-
         <!-- 发现服务 -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -283,3 +277,41 @@ Nacos是阿里主推的一个构建服务的基础框架，它可以选择是支
 ```
 @EnableDiscoveryClient
 ```
+
+最方便的就是动态刷新配置了，需要添加下面的依赖。
+
+```
+<!-- 动态配置 -->
+<dependency>
+    <groupId>com.alibaba.cloud</groupId>
+    <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+    <version>2.1.0.RELEASE</version>
+</dependency>
+```
+
+Controller层需要添加@RefreshScope注解，使用以前正常的注入配置文件属性的方式即可。
+```
+@RefreshScope
+public class ProviderController {
+    ...
+
+    @Value("${name:empty}")
+    private String value;
+}
+```
+
+需要注意的就是如何正确匹配路径，Nacos既然可以作为配置中心那肯定会存储多个服务的配置文件，这就需要一套命名规范来匹配。首先肯定是需要一个bootstrap.yml
+配置文件，这和使用Spring Cloud Config一样，bootstrap.yml是专门用来配置配置中心的一些属性，会比application.yml提前加载，并且会覆盖前者的属性。
+
+Nacos的命名规则是下列这个格式，其中prefix对应spring.application.name的值，也可以通过配置spring.cloud.nacos.config.prefix来修改，中间的则是环境名称，
+最后一个则是对应的文件格式，比如yaml。
+
+
+```
+${prefix}-${spring.profiles.active}.${file-extension}
+```
+
+下面是在Nacos中配置了三个配置文件，nacos-provider.yaml不配置profiles的情况，nacos-provider就是上面说的应用名，前两个则分别对应dev和test环境。
+按照配置文件中激活不同的环境就会读取不同的配置文件。
+
+![nacos1](https://github.com/nemolpsky/feign-demo/raw/master/images/nacos1.png)
