@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 1.116.129.137:8848
+        namespace: microservices-id
+      config:
+        server-addr: 1.116.129.137:8848
+        namespace: microservices-id
+        username: microservices
+        password: i123456
+        file-extension: yaml
+
+server:
+  port: 11000
+
