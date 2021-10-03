@@ -12,7 +12,8 @@ spring:
         username: microservices
         password: i123456
         file-extension: yaml
-
+  zipkin:
+    base-url: http://192.168.1.104:9411
 server:
   port: 11000
 
