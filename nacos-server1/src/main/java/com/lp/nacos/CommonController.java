@@ -1,5 +1,6 @@
 package com.lp.nacos;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,17 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ConsumerController {
-
-    private Logger logger = LoggerFactory.getLogger(ConsumerController.class);
+@Slf4j
+public class CommonController {
 
     @Autowired
-    private ConsumerClient consumerClient;
+    private NacosServer2FeignClient nacosServer2FeignClient;
 
-    @RequestMapping("/get")
+    @RequestMapping("/server1/get")
     public String get() {
-        logger.info("nacos consumer get.");
-        return consumerClient.get();
+        log.info("nacos server1 get.");
+        return nacosServer2FeignClient.get();
     }
 
 }

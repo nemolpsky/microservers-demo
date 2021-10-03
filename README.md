@@ -32,8 +32,7 @@ public interface UserClient extends UserService{
 }
 ```
 
-服务端server中提供对应地址的实现方法调用即可，本质上就是用feign简化调用的过程。
-所以上面客户端的path属性对应服务端中的路径名，value则是对应服务名。
+服务端server中提供对应地址的实现方法调用即可，本质上就是用feign简化调用的过程。所以上面客户端的path属性对应服务端中的路径名，value则是对应服务名。
 
 ```
 @RestController()
@@ -49,10 +48,7 @@ public class UserServer {
 }
 ```
 
-feign自带封装好的日志输出，yml配置文件中先配置client接口的日志路径，再添加FeignLogConfig
-文件，配置输出的级别，默认是None不输出，还有另外三个级别。要使用configuration属性使用这个
-配置类，配置文件的优先级比Bean要高，修改feign.client.default-to-properties参数可以颠倒优先级。
-注意这个配置类添加@Configuration就会自动配置到全局范围。
+feign自带封装好的日志输出，yml配置文件中先配置client接口的日志路径，再添加FeignLogConfig文件，配置输出的级别，默认是None不输出，还有另外三个级别。要使用configuration属性使用这个配置类，配置文件的优先级比Bean要高，修改feign.client.default-to-properties参数可以颠倒优先级。注意这个配置类添加@Configuration就会自动配置到全局范围。
 ```
 logging.level.com.lp.client.UserClient: debug
 
@@ -81,8 +77,7 @@ public Retryer feignRetryer() {
 ---
 
 ### 2. Hystrix使用
-feign里面已经集成了hystrix，不需要额外的依赖，需要下面配置打开，还可以配置超时时间。一旦打开，所有feign
-客户端都被包了一个熔断器。
+feign里面已经集成了hystrix，不需要额外的依赖，需要下面配置打开，还可以配置超时时间。一旦打开，所有feign客户端都被包了一个熔断器。
 ```
 feign:
   client:
@@ -105,8 +100,7 @@ hystrix:
             timeoutInMilliseconds: 1000
 ```
 
-可以专门给一个feign客户端配置自己的断路器，直接新建一个FallbackFactory，或者新建一个Fallback
-都行。
+可以专门给一个feign客户端配置自己的断路器，直接新建一个FallbackFactory，或者新建一个Fallback都行。
 ```
 @FeignClient(value = "server",path = "/user/server", fallbackFactory  = Fallback.class)
 @FeignClient(value = "server",path = "/user/server", fallback  = Fallback2.class)
@@ -124,9 +118,7 @@ public class FooConfiguration {
 }
 ```
 
-Hystrix提供了一个监控仪表盘hystrix dashboard，其实就是一个单独的服务，在hystrix模块中添加
-下面的依赖，启动类使用@EnableHystrixDashboard注解，还需要在配置文件中
-配置代理允许访问的host列表。
+Hystrix提供了一个监控仪表盘hystrix dashboard，其实就是一个单独的服务，在hystrix模块中添加下面的依赖，启动类使用@EnableHystrixDashboard注解，还需要在配置文件中配置代理允许访问的host列表。
 ```
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -139,10 +131,7 @@ Hystrix提供了一个监控仪表盘hystrix dashboard，其实就是一个单�
 </dependency>
 ```
 
-本质上是提供代理去访问服务自带的监控，所以想要用仪表盘监控client项目，需要
-添加下面的监控依赖，配置文件中配置hystrix的访问页面。client还必须添加额外的
-hystrix依赖，使用额外的注解。最后先访问http://localhost:10004/hystrix，再通过
-界面代理访问 http://localhost:10002/actuator/hystrix.stream 。
+本质上是提供代理去访问服务自带的监控，所以想要用仪表盘监控client项目，需要添加下面的监控依赖，配置文件中配置hystrix的访问页面。client还必须添加额外的hystrix依赖，使用额外的注解。最后先访问http://localhost:10004/hystrix，再通过界面代理访问 http://localhost:10002/actuator/hystrix.stream 。
 ```
 <dependency>
     <groupId>org.springframework.boot</groupId>
@@ -150,8 +139,7 @@ hystrix依赖，使用额外的注解。最后先访问http://localhost:10004/hy
 </dependency>
 ```
 
-也可以直接使用@HystrixCommand注解配置Hystrix，参数可以参考Hystrix在Github
-上官方提供的配置文档。
+也可以直接使用@HystrixCommand注解配置Hystrix，参数可以参考Hystrix在Github上官方提供的配置文档。
 
 ```
 @HystrixCommand(fallbackMethod = "errorReturn",groupKey = "key1",commandKey = "key1"
@@ -167,8 +155,7 @@ hystrix依赖，使用额外的注解。最后先访问http://localhost:10004/hy
 ---
 
 ### 3. Ribbon使用
-Ribbon是一个可以实现负载均衡的组件，Feign默认会使用Ribbon，Ribbon客户端的名字会很Feign客户端名字一样。
-如果想要配置全局Ribbon，可以使用下列的配置。
+Ribbon是一个可以实现负载均衡的组件，Feign默认会使用Ribbon，Ribbon客户端的名字会很Feign客户端名字一样。如果想要配置全局Ribbon，可以使用下列的配置。
 
 CustomRule是选择策略，这里简单实现了一个策略，永远都只选择服务列表中第一个服务。
 ```
@@ -204,8 +191,7 @@ public class DefaultRibbonConfig {
 ---
 
 ### 4. Zipkin
-Zipkin是一个分布式的链路追踪框架，是由Twitter开源的，还是比较值得信赖的，它可以记录分析在分布式服务中整个请求的链路耗时，以便分析瓶颈。
-Spring Cloud也集成了，只要添加依赖就可以使用，直接在父项目中添加下面两个依赖，所有的微服务都会记录追踪信息。
+Zipkin是一个分布式的链路追踪框架，是由Twitter开源的，还是比较值得信赖的，它可以记录分析在分布式服务中整个请求的链路耗时，以便分析瓶颈。Spring Cloud也集成了，只要添加依赖就可以使用，直接在父项目中添加下面两个依赖，所有的微服务都会记录追踪信息。
 
 ```
 <dependency>
@@ -218,8 +204,7 @@ Spring Cloud也集成了，只要添加依赖就可以使用，直接在父项�
 </dependency>
 ```
 
-当然还需要添加一个可视化界面，官网有很多种方式，最简单的方式是使用Docker镜像，请求接口后就可以看到在每个服务上调用所花的时间。当然这只是
-一个最简单的例子，真实使用还可以使用消息队列，还可以持久化追踪信息。
+当然还需要添加一个可视化界面，官网有很多种方式，最简单的方式是使用Docker镜像，请求接口后就可以看到在每个服务上调用所花的时间。当然这只是一个最简单的例子，真实使用还可以使用消息队列，还可以持久化追踪信息。
 
 ```
 docker pull openzipkin/zipkin
@@ -231,8 +216,7 @@ docker run --name zipkin -d -p 9411:9411 openzipkin/zipkin
 
 ### 5. Spring Cloud GateWay
 
-Spring Cloud GateWay是一个网关框架，可以转发处理请求。使用起来也很简单，按照官方的文档说法，提供了许多各种各样的工厂来创造拦截器，比如根据
-请求方法类型，请求地址，请求头或者Cookie等等，所以既可以在代码中配置，也可以在配置文件中配置，详细配置都在Gateway项目下的配置文件中。
+Spring Cloud GateWay是一个网关框架，可以转发处理请求。使用起来也很简单，按照官方的文档说法，提供了许多各种各样的工厂来创造拦截器，比如根据请求方法类型，请求地址，请求头或者Cookie等等，所以既可以在代码中配置，也可以在配置文件中配置，详细配置都在Gateway项目下的配置文件中。
 
 ```
 <dependency>
@@ -244,11 +228,9 @@ Spring Cloud GateWay是一个网关框架，可以转发处理请求。使用起
 ---
 
 ### 6. Nacos
-Nacos是阿里主推的一个构建服务的基础框架，它可以选择是支持AP还是CP，除了像Eureka那样提供服务注册的功能之外，还自带管理界面，使用起来更加方便。使用的时候
-首先要下载安装，然后添加依赖。
+Nacos是阿里的开源注册中心，可以选择是支持AP还是CP，除了像Eureka那样提供服务注册的功能之外，还自带管理界面，使用起来更加方便。
 
-添加下面的依赖就可以使用，但是要注意，对版本是有要求的，Spring Cloud，Spring Cloud Alibaba和Nacos依赖的版本都是有要求的。详细的可以查看[官网](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)，
-本项目是Spring Cloud Hoxton.SR9，Spring Cloud Alibaba 2.2.0.RELEASE和Nacos 2.1.0.RELEASE。
+添加下面的依赖就可以使用，但是要注意，对版本是有要求的，Spring Cloud，Spring Cloud Alibaba和Nacos依赖的版本都是有要求的，详细的可以查看[官网](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)，本项目是Spring Cloud Hoxton.SR9，Spring Cloud Alibaba 2.2.0.RELEASE和Nacos 2.1.0.RELEASE。
 ```
     <dependencies>
         <!-- 发现服务 -->
@@ -272,16 +254,14 @@ Nacos是阿里主推的一个构建服务的基础框架，它可以选择是支
     </dependencyManagement>
 ```
 
-启动类打个注解，访问 http://localhost:8848/nacos/index.html 就可以看到Nacos的控制台服务列表里面有数据了。总的来说很简单，功能也比较齐全，还自带
-管理界面，减少了运维成本，不过文档和例子比起Spring还是少了很多，质量也差了很多。
+启动类打个注解，访问 http://localhost:8848/nacos/index.html 就可以看到Nacos的控制台服务列表里面有数据了。总的来说很简单，功能也比较齐全，还自带管理界面，减少了运维成本，不过文档和例子比起Spring还是少了很多，质量也差了很多。
 ```
 @EnableDiscoveryClient
 ```
 
-最方便的就是动态刷新配置了，需要添加下面的依赖。
+除此之外Nacos还可以直接当作配置中心，需要添加下面的依赖。
 
 ```
-<!-- 动态配置 -->
 <dependency>
     <groupId>com.alibaba.cloud</groupId>
     <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
@@ -289,7 +269,15 @@ Nacos是阿里主推的一个构建服务的基础框架，它可以选择是支
 </dependency>
 ```
 
-Controller层需要添加@RefreshScope注解，使用以前正常的注入配置文件属性的方式即可。
+需要注意的就是如何正确匹配路径，Nacos既然可以作为配置中心那肯定会存储多个服务的配置文件，这就需要一套命名规范来匹配。首先是需要一个```bootstrap.yml```配置文件，这和使用Spring Cloud Config一样，bootstrap.yml是专门用来设置配置中心的一些属性，会比application.yml提前加载，并且会覆盖前者的属性。
+
+Nacos的命名规则是下列这个格式，其中prefix对应spring.application.name的值，也可以通过配置spring.cloud.nacos.config.prefix来修改，中间的则是环境名称，例如dev等。最后一个则是对应的文件格式，比如yaml。也就是说Nacos的配置文件名字要和这个规则对的上才能找到对应的配置文件。
+
+```
+${prefix}-${spring.profiles.active}.${file-extension}
+```
+
+还有就是动态刷新配置了，Controller层需要添加@RefreshScope注解，使用以前正常的注入配置文件属性的方式即可。
 ```
 @RefreshScope
 public class ProviderController {
@@ -300,18 +288,14 @@ public class ProviderController {
 }
 ```
 
-需要注意的就是如何正确匹配路径，Nacos既然可以作为配置中心那肯定会存储多个服务的配置文件，这就需要一套命名规范来匹配。首先肯定是需要一个bootstrap.yml
-配置文件，这和使用Spring Cloud Config一样，bootstrap.yml是专门用来配置配置中心的一些属性，会比application.yml提前加载，并且会覆盖前者的属性。
-
-Nacos的命名规则是下列这个格式，其中prefix对应spring.application.name的值，也可以通过配置spring.cloud.nacos.config.prefix来修改，中间的则是环境名称，
-最后一个则是对应的文件格式，比如yaml。
-
-
-```
-${prefix}-${spring.profiles.active}.${file-extension}
-```
-
 下面是在Nacos中配置了三个配置文件，nacos-provider.yaml不配置profiles的情况，nacos-provider就是上面说的应用名，前两个则分别对应dev和test环境。
 按照配置文件中激活不同的环境就会读取不同的配置文件。
 
 ![nacos1](./images/nacos1.png)
+
+Nacos中有命名空间的概念，可以理解为分组的意思，注册中心和配置中心都可以配置命名空间，如果是配置中心则一定要对应正确的命名空间才能读取到，如果是注册中心则一定是在同一个命名空间下才会请求到别的服务。
+
+注意下面的两张图，在配置文件中填写的是命名空间的id才能生效，填写命名空间的名字是没效果的，如果命名空间不存在也可以注册成功，但是控制台不显示注册的服务，因为根本就没有对应的tag页面。
+
+![nacos2](./images/nacos2.png)
+![nacos3](./images/nacos3.png)

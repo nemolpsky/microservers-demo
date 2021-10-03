@@ -1,5 +1,6 @@
 package com.lp.nacos;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -9,16 +10,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RefreshScope
-public class ProviderController {
+@Slf4j
+public class CommonController {
 
-    private Logger logger = LoggerFactory.getLogger(ProviderController.class);
+    @Value("${message.text:registry failed}")
+    private String nacosMessage;
 
-    @Value("${name:empty}")
-    private String value;
-
-    @RequestMapping("/server/get")
+    @RequestMapping("/server2/get")
     public String get() {
-        return "This is Nacos-Provider message, and value is " + value;
+        log.info("This is nacos message:{}",nacosMessage);
+        return null;
     }
 
 }

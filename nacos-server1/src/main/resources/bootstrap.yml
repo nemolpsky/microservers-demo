@@ -1,6 +1,6 @@
 spring:
   application:
-    name: nacos-server2
+    name: nacos-server1
   cloud:
     nacos:
       discovery:
@@ -14,7 +14,7 @@ spring:
         file-extension: yaml
 
 server:
-  port: 10006
+  port: 10007
 
 
 # 有环境变量的情况下的配置
