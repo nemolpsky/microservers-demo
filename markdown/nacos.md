@@ -2,7 +2,7 @@ Nacos是阿里的开源注册中心，可以选择是支持AP还是CP，除了�
 
 添加下面的依赖就可以使用，但是要注意，对版本是有要求的，Spring Cloud，Spring Cloud Alibaba和Nacos依赖的版本都是有要求的，详细的可以查看[官网](https://github.com/alibaba/spring-cloud-alibaba/wiki/%E7%89%88%E6%9C%AC%E8%AF%B4%E6%98%8E)，本项目是Spring Cloud Hoxton.SR9，Spring Cloud Alibaba 2.2.6.RELEASE。
 
-切记一定要版本对的上，不然各种乱七八糟的异常都会有，国内的开源框架在版本兼容和文档方面一直做的挺糟糕的。
+切记一定要版本对的上，不然各种乱七八糟的异常都会有，最开始使用2.2.0版本的```spring-cloud-alibaba-dependencies```依赖，开启鉴权后一直提示找不到用户，升级到2.2.6之后就没问题了，国内的开源框架在版本兼容和文档方面一直做的挺糟糕的。
 ```
     <dependencies>
         <!-- 发现服务 -->
@@ -62,14 +62,14 @@ public class ProviderController {
 下面是在Nacos中配置了三个配置文件，nacos-provider.yaml不配置profiles的情况，nacos-provider就是上面说的应用名，前两个则分别对应dev和test环境。
 按照配置文件中激活不同的环境就会读取不同的配置文件。
 
-![nacos1](./images/nacos1.png)
+![nacos1](../images/nacos1.png)
 
 Nacos中有命名空间的概念，可以理解为分组的意思，注册中心和配置中心都可以配置命名空间，如果是配置中心则一定要对应正确的命名空间才能读取到，如果是注册中心则一定是在同一个命名空间下才会请求到别的服务。
 
 注意下面的两张图，在配置文件中填写的是命名空间的id才能生效，填写命名空间的名字是没效果的，如果命名空间不存在也可以注册成功，但是控制台不显示注册的服务，因为根本就没有对应的tag页面。
 
-![nacos2](./images/nacos2.png)
-![nacos3](./images/nacos3.png)
+![nacos2](../images/nacos2.png)
+![nacos3](../images/nacos3.png)
 
 
 此外nacos的鉴权是默认关闭的，至少1.4.2版本是，需要手动设置配置打开，其实就是需要登录控制台的账户名和密码，具体可以参考[官网](https://nacos.io/zh-cn/docs/auth.html)。
