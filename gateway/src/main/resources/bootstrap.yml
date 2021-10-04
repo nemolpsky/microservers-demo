@@ -3,17 +3,32 @@ spring:
     name: gateway
   cloud:
     nacos:
+     # 在这里配置用户名和密码，相当于同时配置了注册中心和配置中心
+     # 下面则是分别的独自配置
+#      username: microservices
+#      password: password
+     # 密码加密
+      username: ENC(F3KUstYYrVCbp+dBwFkWXNISkI8BpOw6)
+      password: ENC(lNEp2eRLAgzgO6x3Djhvrw==)
       discovery:
         server-addr: 1.116.129.137:8848
+        #        username: name
+        #        password: password
         namespace: microservices-id
       config:
         server-addr: 1.116.129.137:8848
         namespace: microservices-id
-        username: microservices
-        password: i123456
+        #        username: name
+        #        password: password
         file-extension: yaml
   zipkin:
     base-url: http://192.168.1.104:9411
 server:
   port: 11000
+jasypt:
+  encryptor:
+    password: gateway-public-key
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
 

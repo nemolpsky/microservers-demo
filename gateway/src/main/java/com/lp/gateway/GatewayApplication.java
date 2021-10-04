@@ -1,5 +1,7 @@
 package com.lp.gateway;
 
+
+import com.ulisesbocchio.jasyptspringboot.annotation.EnableEncryptableProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 @SpringBootApplication
 @Slf4j
+@EnableEncryptableProperties
 public class GatewayApplication {
 
     @Value("${gateway.message:can not load configure.}")
